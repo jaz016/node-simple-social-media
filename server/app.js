@@ -17,4 +17,4 @@ app.use(express.static(path.join(__dirname,'../public')));
 
 app.listen(process.env.PORT, () => {
 	console.log(`Server now listening at port ${process.env.PORT}..`);
-})
+});
