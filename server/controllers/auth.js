@@ -12,6 +12,7 @@ exports.signUp = async (req, res, next) => {
 
 		if(password !== confirmPass) {
 			return res.status(422).json({
+				status : 422,
 				message : 'Passwords doesn\'t match.'
 			});
 		}
@@ -20,6 +21,7 @@ exports.signUp = async (req, res, next) => {
 		const foundUser = await User.findOne({ email : email });
 		if(foundUser) {
 			return res.status(422).json({
+				status : 422,
 				message : 'A user with that e-mail already exists.'
 			});
 		}
@@ -32,7 +34,8 @@ exports.signUp = async (req, res, next) => {
 
 
 		res.status(201).json({
-			message : 'User created.',
+			status : 201,
+			message : 'User created. You can now log in.',
 			userId : savedUser._id
 		})
 

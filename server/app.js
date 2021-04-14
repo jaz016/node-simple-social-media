@@ -15,14 +15,10 @@ dotenv.config();
 
 // parse application/json
 app.use(express.json());
-app.use(express.urlencoded({
-	extended: true
-}));
 
 
 // register routes
 app.use(authRoutes);
-
 
 
 
