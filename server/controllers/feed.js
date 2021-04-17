@@ -9,7 +9,7 @@ exports.getPosts = async (req, res, next) => {
 
 	try {
 
-		const posts = await Post.find();
+		const posts = await Post.find().sort({createdAt : -1}).populate('postedBy');
 		res.status(200).json({
 			status : 200,
 			message : 'Posts fetched successfully!',

@@ -124,7 +124,61 @@ if(!localStorage.hasOwnProperty('token') || !localStorage.hasOwnProperty('userId
 
 
 function showPosts() {
+	fetch('http://localhost:3000/posts')
+	.then(data => data.json())
+	.then(resData => {
+		if(resData.status === 200) {
+			
+			const posts = resData.posts;
 
+			let feedHtml = '';
+			if(posts.length > 0) {
+
+
+				
+				posts.forEach(post => {
+
+					feedHtml += `
+
+						<div class="post-preview">
+
+							<h3 class="post-subtitle">
+								${post.content}
+							</h3>
+				
+							<p class="post-meta">Posted by
+							<a href="#">${post.postedBy.email}</a>
+							on ${post.createdAt}
+							</p>
+				
+							
+						</div>
+
+						<hr>
+					`;
+
+				});
+
+
+				feedHtml += `
+					<div id="pager" class="clearfix">
+						<a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+					</div>
+				`;
+
+			} else {
+				feedHtml += '<p>There are no posts to show.</p>';
+			}
+
+
+			document.getElementById('feed').innerHTML = feedHtml;
+
+
+		}
+	})
+	.catch(err => {
+		console.log(err);
+	});
 }
 
 
