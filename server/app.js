@@ -4,8 +4,13 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
 
+// middleware
+const auth = require('./middleware/auth');
+
+
 // routes
 const authRoutes = require('./routes/auth');
+const feedRoutes = require('./routes/feed');
 
 
 
@@ -17,8 +22,14 @@ dotenv.config();
 app.use(express.json());
 
 
+// register middleware
+app.use(auth);
+
+
+
 // register routes
 app.use(authRoutes);
+app.use(feedRoutes);
 
 
 
