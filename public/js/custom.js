@@ -1,6 +1,16 @@
 const headerArea = document.querySelector(".site-heading");
 
 
+
+
+
+
+// show posts
+showPosts();
+
+
+
+
 // check if token is set or is valid (if authenticated)
 if(!localStorage.hasOwnProperty('token') || !localStorage.hasOwnProperty('userId')) {
 	renderLogin();
@@ -65,7 +75,8 @@ if(!localStorage.hasOwnProperty('token') || !localStorage.hasOwnProperty('userId
 	// post status script
 	document.querySelector('#post-status-btn').addEventListener('click', () => {
 
-		const post = document.querySelector('[name="post"]').value;
+		const postEl = document.querySelector('[name="post"]');
+		const post = postEl.value;
 		
 		// validate post status field
 		if(post.trim() === '') {
@@ -85,9 +96,16 @@ if(!localStorage.hasOwnProperty('token') || !localStorage.hasOwnProperty('userId
 			})
 			.then(data => data.json())
 			.then(resData => {
-				console.log(resData);
+				if(resData.status === 201) {
+					postEl.value = '';
+				} else {
+					alert(resData.message);
+				}
+				
 			})
-			.catch();
+			.catch(err => {
+				console.log(err);
+			});
 
 
 		}
@@ -100,6 +118,12 @@ if(!localStorage.hasOwnProperty('token') || !localStorage.hasOwnProperty('userId
 
 	});
 
+
+}
+
+
+
+function showPosts() {
 
 }
 
