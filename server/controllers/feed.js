@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Post = require('../models/post');
+const io = require('../util/socket');
 
 
 
@@ -59,7 +60,16 @@ exports.createPost = async (req, res, next) => {
 		}
 	
 		user.posts.push(savedPost._id)
-		user.save();
+		const savedUser = await user.save();
+
+
+		io.getIO().emit('new post', { 
+
+				email : savedUser.email,
+				content : savedPost.content,
+				createdAt : savedPost.createdAt.toISOString()
+
+		});
 	
 	
 		res.status(201).json({

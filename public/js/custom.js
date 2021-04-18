@@ -1,7 +1,15 @@
+var socket = io();
+
+
+// respond to new post event from socket.io
+socket.on('new post', post => {
+	insertNewPost(post);
+});
+
+
+
+
 const headerArea = document.querySelector(".site-heading");
-
-
-
 
 
 
@@ -229,5 +237,27 @@ function renderPost() {
 	document.querySelector('#navbarResponsive ul li').innerHTML = `
 	<a class="nav-link" id="logout" href="#">Log Out</a>
 	`;
+
+}
+
+
+
+function insertNewPost(post) {
+
+	const postEl = document.createElement('div');
+	postEl.className = 'post-preview';
+	postEl.innerHTML = `
+
+		<h3 class="post-subtitle">
+			${post.content}
+		</h3>
+
+		<p class="post-meta">Posted by
+		<a href="#">${post.email}</a>
+		on ${post.createdAt}
+		</p>
+	`;
+
+	document.getElementById('feed').insertBefore(postEl, document.getElementById('feed').childNodes[0]);
 
 }
