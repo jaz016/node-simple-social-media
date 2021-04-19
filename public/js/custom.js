@@ -10,6 +10,7 @@ socket.on('new post', post => {
 
 
 const headerArea = document.querySelector(".site-heading");
+let postsCount = 0;
 
 
 
@@ -165,6 +166,9 @@ function showPosts() {
 						<hr>
 					`;
 
+
+					postsCount++;
+
 				});
 
 
@@ -258,6 +262,13 @@ function insertNewPost(post) {
 		</p>
 	`;
 
-	document.getElementById('feed').insertBefore(postEl, document.getElementById('feed').childNodes[0]);
+
+	if(postsCount > 0) {
+		document.getElementById('feed').insertBefore(postEl, document.getElementById('feed').childNodes[0]);
+	} else {
+		document.getElementById('feed').firstChild.remove();
+		document.getElementById('feed').appendChild(postEl);
+		postsCount++;
+	}
 
 }
