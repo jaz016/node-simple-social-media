@@ -156,7 +156,7 @@ function showPosts() {
 							</h3>
 				
 							<p class="post-meta">Posted by
-							<a href="#">${post.postedBy.email}</a>
+							<i>${post.postedBy.email}</i>
 							on ${post.createdAt}
 							</p>
 				
@@ -171,12 +171,6 @@ function showPosts() {
 
 				});
 
-
-				feedHtml += `
-					<div id="pager" class="clearfix">
-						<a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-					</div>
-				`;
 
 			} else {
 				feedHtml += '<p>There are no posts to show.</p>';
@@ -257,7 +251,7 @@ function insertNewPost(post) {
 		</h3>
 
 		<p class="post-meta">Posted by
-		<a href="#">${post.email}</a>
+		<i>${post.email}</i>
 		on ${post.createdAt}
 		</p>
 	`;

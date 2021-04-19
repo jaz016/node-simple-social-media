@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const Post = require('../models/post');
 const io = require('../util/socket');
-
+const { format } = require('date-fns');
 
 
 
@@ -14,7 +14,14 @@ exports.getPosts = async (req, res, next) => {
 		res.status(200).json({
 			status : 200,
 			message : 'Posts fetched successfully!',
-			posts : posts
+			posts : posts.map(post => {
+				return {
+					_id : post._id.toString(),
+					content : post.content,
+					postedBy : { email : post.postedBy.email },
+					createdAt : format(new Date(post.createdAt), 'MMM dd, yyyy @ h:mm aaa')
+				}
+			})
 		});
 
 	} catch (err) {
@@ -67,7 +74,7 @@ exports.createPost = async (req, res, next) => {
 
 				email : savedUser.email,
 				content : savedPost.content,
-				createdAt : savedPost.createdAt.toISOString()
+				createdAt : format(new Date(savedPost.createdAt), 'MMM dd, yyyy @ h:mm aaa')
 
 		});
 	
