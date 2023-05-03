@@ -3,7 +3,7 @@ A dead simple social media powered by Node and Socket.io
 
 ## Preview
 
-![sss](https://user-images.githubusercontent.com/18715077/120138590-5581db80-c209-11eb-96ab-bf55a80ee131.jpg)
+![sss](demo.gif)
 
 
 
